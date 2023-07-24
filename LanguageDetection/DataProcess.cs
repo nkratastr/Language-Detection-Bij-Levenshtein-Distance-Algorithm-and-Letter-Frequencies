@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,51 +9,69 @@ namespace LanguageDetection
 {
     public class DataProcess
     {
+        private TextBox _textBoxInputText;
+        private Variables _variables;
 
-        public void ReplacetheCharachtersOutOfLettersInTheInputText(Variables variables)
+        public DataProcess(Variables variables, TextBox textBox_InputText) 
         {
-            variables.inputText = variables.inputText.Replace(" ", "");
-            variables.inputText = variables.inputText.Replace("\r", "");
-            variables.inputText = variables.inputText.Replace("\t", "");
-            variables.inputText = variables.inputText.Replace("\n", "");
-            variables.inputText = variables.inputText.Replace(".", "");
+            _textBoxInputText = textBox_InputText;
+            this._variables = variables;
+            _variables.inputText = _textBoxInputText.Text.ToUpper();
+        }    
+
+        public void ReplacetheCharachtersOutOfLettersInTheInputText()
+        {
+            _variables.inputText = _variables.inputText.Replace(" ", "");
+            _variables.inputText = _variables.inputText.Replace("\r", "");
+            _variables.inputText = _variables.inputText.Replace("\t", "");
+            _variables.inputText = _variables.inputText.Replace("\n", "");
+            _variables.inputText = _variables.inputText.Replace(".", "");
         }
 
-        public void CountAlltheLettersInInputText(Variables variables)
+
+        public void FilterAndDisplayValidCharactersOfInputText()
         {
-            foreach (var chr in variables.inputTextArray)
+            char[] charArray = _variables.inputText.ToCharArray();
+            _variables.inputTextArray.AddRange(charArray);
+
+            _textBoxInputText.Text = "";
+
+            foreach (char c in _variables.inputTextArray)
             {
-                if (variables.totalCapitalLettersInTurkishEnglishSpanishItalianGermanFrenchDutchAlphabets.ContainsKey(chr))
+                if (_variables.totalCapitalLettersInTurkishEnglishSpanishItalianGermanFrenchDutchAlphabets.ContainsKey(c))
                 {
-                    variables.totalCapitalLettersInTurkishEnglishSpanishItalianGermanFrenchDutchAlphabets[chr]++;
+                    _textBoxInputText.Text += c;
+                }
+                Application.DoEvents();
+            }
+        }
+
+        public void CountAlltheLettersInInputText()
+        {
+            foreach (var chr in _variables.inputTextArray)
+            {
+                if (_variables.totalCapitalLettersInTurkishEnglishSpanishItalianGermanFrenchDutchAlphabets.ContainsKey(chr))
+                {
+                    _variables.totalCapitalLettersInTurkishEnglishSpanishItalianGermanFrenchDutchAlphabets[chr]++;
                 }
 
                 Application.DoEvents();
             }
         }
 
-        public void CalculateTheFrequenciesOfTheLettersInInputText(Variables variables)
+        public void CalculateTheFrequenciesOfTheLettersInInputText()
         {
             double frequenciesofTheLettersinInputText = new double();
-            //textBox_InputText.Text += "\r\n";
-            foreach (var kvp in variables.totalCapitalLettersInTurkishEnglishSpanishItalianGermanFrenchDutchAlphabets)
+            _textBoxInputText.Text += "\r\n";
+            foreach (var kvp in _variables.totalCapitalLettersInTurkishEnglishSpanishItalianGermanFrenchDutchAlphabets)
             {
-                frequenciesofTheLettersinInputText = ((double)kvp.Value / variables.inputTextArray.Count) * 100;
-                variables.totalFrequenciesofLettersinInputText[kvp.Key] = Math.Round(frequenciesofTheLettersinInputText, 2);
-                //textBox_InputText.Text += kvp.Key.ToString() + "---->" + variables.totalFrequenciesofLettersinInputText[kvp.Key] + "\r\n";
+                frequenciesofTheLettersinInputText = ((double)kvp.Value / _variables.inputTextArray.Count) * 100;
+                _variables.totalFrequenciesofLettersinInputText[kvp.Key] = Math.Round(frequenciesofTheLettersinInputText, 2);
+                _textBoxInputText.Text += kvp.Key.ToString() + "---->" + _variables.totalFrequenciesofLettersinInputText[kvp.Key] + "\r\n";
                 Application.DoEvents();
 
             }
         }
-
-
-
-
-
-
-
-
-
 
     }
 }

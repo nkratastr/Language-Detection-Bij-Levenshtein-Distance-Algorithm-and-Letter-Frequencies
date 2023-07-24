@@ -19,10 +19,16 @@
         public string inputText="";
         public List<char> inputTextArray =new List<char>();
 
-        
+        public string turkishLettersOrderdFrequency = "AEİRNKLDOIUMTSBYÜVŞGZÇHĞPÖFJ";
+        public string englishLettersOrderdFrequency = "ETAOINSHRDLCUMWFGYPBVKJXQZ";
+        public string spanishLettersOrderdFrequency = "EAOSNRILDTUCMPBGVQHFZJXYKW";
+        public string italianLettersOrderdFrequency = "EAIONLRTSCDUMPBGHVZFQKJXYW";
+        public string germanLettersOrderdFrequency = "ENISRATDHULCGMBOVKWZPFJXYQ";
+        public string frenchLettersOrderdFrequency = "ESAITNRULODCMPFBGVHQYXJZK";
+        public string dutchLettersOrderdFrequency = "ENATORDISLGHKMVUWZPBCFJYX";
+        public string theLetterInTheTextOrderdByFrequency = "";
 
-
-    public IDictionary<char, double> letterFrequenciesOfTheTurkishAlphabet = new Dictionary<char, double> {
+        public IDictionary<char, double> letterFrequenciesOfTheTurkishAlphabet = new Dictionary<char, double> {
     { 'A', 11.92 },
     { 'B', 2.84 },
     { 'C', 0.96 },

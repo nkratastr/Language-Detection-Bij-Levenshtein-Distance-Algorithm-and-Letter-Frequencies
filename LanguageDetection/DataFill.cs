@@ -1,119 +1,153 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+
 
 namespace LanguageDetection
 {
     public class DataFill
     {
-        
-        public void FillTheLetterTableTurkishAlphabetColumn(Variables variables, DataGridView _dataGridViewLetterTable)
+
+        private readonly DataGridView _dataGridViewLetterTable;
+        private Variables _variables;
+
+        public  DataFill(Variables variables, DataGridView dataGridView_LetterTable)
+        {
+            _dataGridViewLetterTable = dataGridView_LetterTable;
+            _variables = variables; 
+        }
+
+        public void CreateAndWriteTheWholeAlphabetAndTheCountsofLettersToLetterTable()
+
+        {
+            _dataGridViewLetterTable.DataSource = _variables.totalFrequenciesofLettersinInputText.ToList();
+
+        }
+
+        public void CreateTheTurkishEnglishGermanSpanishDutchAlphabetColumns()
+        {
+            _dataGridViewLetterTable.Columns[0].HeaderText = "Letters";
+            _dataGridViewLetterTable.Columns[1].HeaderText = "Frequency";
+            _dataGridViewLetterTable.Columns.Add("Turkish", "Turkish");
+            _dataGridViewLetterTable.Columns.Add("English", "English");
+            _dataGridViewLetterTable.Columns.Add("Spanish", "Spanish");
+            _dataGridViewLetterTable.Columns.Add("Italian", "Italian");
+            _dataGridViewLetterTable.Columns.Add("German", "German");
+            _dataGridViewLetterTable.Columns.Add("French", "French");
+            _dataGridViewLetterTable.Columns.Add("Dutch", "Dutch");
+        }
+
+
+
+        public void FillTheLetterTableTurkishAlphabetColumn()
         {
             
             for (int i = 0; i< _dataGridViewLetterTable.Rows.Count; i++)
             {
                 if (_dataGridViewLetterTable.Rows[i].Cells[0].Value != null)
                 {
-                    if (variables.letterFrequenciesOfTheTurkishAlphabet.ContainsKey(Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)))
+                    if (_variables.letterFrequenciesOfTheTurkishAlphabet.ContainsKey(Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)))
                     {
-                      _dataGridViewLetterTable.Rows[i].Cells[2].Value = variables.letterFrequenciesOfTheTurkishAlphabet[Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)];
+                      _dataGridViewLetterTable.Rows[i].Cells[2].Value = _variables.letterFrequenciesOfTheTurkishAlphabet[Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)];
                     }
                 }
             }
         }
 
-        public void FillTheLetterTableEnglishAlphabetColumn(Variables variables, DataGridView _dataGridViewLetterTable)
+        public void FillTheLetterTableEnglishAlphabetColumn()
         {
     
             for (int i = 0; i < _dataGridViewLetterTable.Rows.Count; i++)
             {
                 if (_dataGridViewLetterTable.Rows[i].Cells[0].Value != null)
                 {
-                    if (variables.letterFrequenciesOfTheEnglishAlphabet.ContainsKey(Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)))
+                    if (_variables.letterFrequenciesOfTheEnglishAlphabet.ContainsKey(Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)))
                     {
-                       _dataGridViewLetterTable.Rows[i].Cells[3].Value = variables.letterFrequenciesOfTheEnglishAlphabet[Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)];
+                       _dataGridViewLetterTable.Rows[i].Cells[3].Value = _variables.letterFrequenciesOfTheEnglishAlphabet[Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)];
                     }
                 }
             }
             
         }
 
-        public void FillTheLetterTableSpanishAlphabetColumn(Variables variables, DataGridView _dataGridViewLetterTable)
+        public void FillTheLetterTableSpanishAlphabetColumn()
         {
 
             for (int i = 0; i < _dataGridViewLetterTable.Rows.Count; i++)
             {
                 if (_dataGridViewLetterTable.Rows[i].Cells[0].Value != null)
                 {
-                    if (variables.letterFrequenciesOfTheSpanishAlphabet.ContainsKey(Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)))
+                    if (_variables.letterFrequenciesOfTheSpanishAlphabet.ContainsKey(Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)))
                     {
-                      _dataGridViewLetterTable.Rows[i].Cells[4].Value = variables.letterFrequenciesOfTheSpanishAlphabet[Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)];
+                      _dataGridViewLetterTable.Rows[i].Cells[4].Value = _variables.letterFrequenciesOfTheSpanishAlphabet[Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)];
                     }
                 }
             }
 
         }
 
-        public void FillTheLetterTableItalianAlphabetColumn(Variables variables, DataGridView _dataGridViewLetterTable)
+        public void FillTheLetterTableItalianAlphabetColumn()
         {
             for (int i = 0; i < _dataGridViewLetterTable.Rows.Count; i++)
             {
                 if (_dataGridViewLetterTable.Rows[i].Cells[0].Value != null)
                 {
-                    if (variables.letterFrequenciesOfTheItalianAlphabet.ContainsKey(Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)))
+                    if (_variables.letterFrequenciesOfTheItalianAlphabet.ContainsKey(Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)))
                     {
-                     _dataGridViewLetterTable.Rows[i].Cells[5].Value = variables.letterFrequenciesOfTheItalianAlphabet[Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)];
+                     _dataGridViewLetterTable.Rows[i].Cells[5].Value = _variables.letterFrequenciesOfTheItalianAlphabet[Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)];
                     }
                 }
             }
         }
 
-        public void FillTheLetterTableGermanAlphabetColumn(Variables variables, DataGridView _dataGridViewLetterTable)
+        public void FillTheLetterTableGermanAlphabetColumn()
         {
             for (int i = 0; i < _dataGridViewLetterTable.Rows.Count; i++)
             {
                 if (_dataGridViewLetterTable.Rows[i].Cells[0].Value != null)
                 {
-                    if (variables.letterFrequenciesOfTheGermanAlphabet.ContainsKey(Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)))
+                    if ( _variables.letterFrequenciesOfTheGermanAlphabet.ContainsKey(Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)))
                     {
-                     _dataGridViewLetterTable.Rows[i].Cells[6].Value = variables.letterFrequenciesOfTheGermanAlphabet[Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)];
+                     _dataGridViewLetterTable.Rows[i].Cells[6].Value = _variables.letterFrequenciesOfTheGermanAlphabet[Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)];
                     }
                 }
             }
         }
 
-        public void FillTheLetterTableFrenchAlphabetColumn(Variables variables, DataGridView _dataGridViewLetterTable)
+        public void FillTheLetterTableFrenchAlphabetColumn()
         {
             for (int i = 0; i < _dataGridViewLetterTable.Rows.Count; i++)
             {
                 if (_dataGridViewLetterTable.Rows[i].Cells[0].Value != null)
                 {
-                    if (variables.letterFrequenciesOfTheFrenchAlphabet.ContainsKey(Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)))
+                    if (_variables.letterFrequenciesOfTheFrenchAlphabet.ContainsKey(Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)))
                     {
-                     _dataGridViewLetterTable.Rows[i].Cells[7].Value = variables.letterFrequenciesOfTheFrenchAlphabet[Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)];
+                     _dataGridViewLetterTable.Rows[i].Cells[7].Value = _variables.letterFrequenciesOfTheFrenchAlphabet[Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)];
                     }
                 }
             }
         }
 
-        public void FillTheLetterTableDutchAlphabetColumn(Variables variables, DataGridView _dataGridViewLetterTable)
+        public void FillTheLetterTableDutchAlphabetColumn()
         {
             for (int i = 0; i < _dataGridViewLetterTable.Rows.Count; i++)
             {
                 // write if statement to prevent the error of out of range
                 if (_dataGridViewLetterTable.Rows[i].Cells[0].Value != null)
                 {
-                    if (variables.letterFrequenciesOfTheDutchAlphabet.ContainsKey(Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)))
+                    if (_variables.letterFrequenciesOfTheDutchAlphabet.ContainsKey(Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)))
                     {
-                        _dataGridViewLetterTable.Rows[i].Cells[8].Value = variables.letterFrequenciesOfTheDutchAlphabet[Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)];
+                        _dataGridViewLetterTable.Rows[i].Cells[8].Value = _variables.letterFrequenciesOfTheDutchAlphabet[Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)];
                     }
                 }
             }
-        }
+            _dataGridViewLetterTable.Refresh();
+            _dataGridViewLetterTable.AutoResizeColumns();
 
+        }
 
 
 

@@ -12,99 +12,44 @@ namespace LanguageDetection
             InitializeComponent();
         }
 
-      
-
         private void button_StarttheProcess_Click(object sender, EventArgs e)
         {
 
             Variables variables = new();
-            DataProcess dataProcess = new();
-            DataFill dataFill = new DataFill();
-            
+            DataProcess dataProcess = new DataProcess(variables, textBox_InputText);
+            DataFill dataFill = new DataFill(variables, dataGridView_LetterTable);
            
 
-            variables.inputText = textBox_InputText.Text.ToUpper();
+            dataProcess.ReplacetheCharachtersOutOfLettersInTheInputText();
 
-            dataProcess.ReplacetheCharachtersOutOfLettersInTheInputText(variables);
+            dataProcess.FilterAndDisplayValidCharactersOfInputText();
 
-            FilterAndDisplayValidCharactersOfInputText(variables);
+            dataProcess.CountAlltheLettersInInputText();
 
-            dataProcess.CountAlltheLettersInInputText(variables);
-
-            dataProcess.CalculateTheFrequenciesOfTheLettersInInputText(variables);
-
-            CreateAndWriteTheWholeAlphabetAndTheCountsofLettersToLetterTable(variables);
-            CreateTheTurkishEnglishGermanSpanishDutchAlphabetColumns();
+            dataProcess.CalculateTheFrequenciesOfTheLettersInInputText();
 
 
-            
-            //refresh the datagridview
-            dataGridView_LetterTable.Refresh();
+            dataFill.CreateAndWriteTheWholeAlphabetAndTheCountsofLettersToLetterTable();
 
+            dataFill.CreateTheTurkishEnglishGermanSpanishDutchAlphabetColumns();
 
+            dataFill.FillTheLetterTableTurkishAlphabetColumn();
 
-            dataFill.FillTheLetterTableTurkishAlphabetColumn(variables, dataGridView_LetterTable);
+            dataFill.FillTheLetterTableEnglishAlphabetColumn();
 
-            dataFill.FillTheLetterTableEnglishAlphabetColumn(variables, dataGridView_LetterTable);
+            dataFill.FillTheLetterTableSpanishAlphabetColumn();
 
-            dataFill.FillTheLetterTableSpanishAlphabetColumn(variables, dataGridView_LetterTable);
+            dataFill.FillTheLetterTableItalianAlphabetColumn();
 
-            dataFill.FillTheLetterTableItalianAlphabetColumn(variables, dataGridView_LetterTable);
+            dataFill.FillTheLetterTableGermanAlphabetColumn();
 
-            dataFill.FillTheLetterTableGermanAlphabetColumn(variables, dataGridView_LetterTable);
+            dataFill.FillTheLetterTableFrenchAlphabetColumn();
 
-            dataFill.FillTheLetterTableFrenchAlphabetColumn(variables, dataGridView_LetterTable);
+            dataFill.FillTheLetterTableDutchAlphabetColumn();
 
-            dataFill.FillTheLetterTableDutchAlphabetColumn(variables, dataGridView_LetterTable);
-
-            dataGridView_LetterTable.AutoResizeColumns();
-
-
-            void CreateAndWriteTheWholeAlphabetAndTheCountsofLettersToLetterTable(Variables variables)
-
-            {
-                dataGridView_LetterTable.DataSource = variables.totalFrequenciesofLettersinInputText.ToList();
-
-            }
-
-            void CreateTheTurkishEnglishGermanSpanishDutchAlphabetColumns()
-            {
-                dataGridView_LetterTable.Columns[0].HeaderText = "Letters";
-                dataGridView_LetterTable.Columns[1].HeaderText = "Frequency";
-                dataGridView_LetterTable.Columns.Add("Turkish", "Turkish");
-                dataGridView_LetterTable.Columns.Add("English", "English");
-                dataGridView_LetterTable.Columns.Add("Spanish", "Spanish");
-                dataGridView_LetterTable.Columns.Add("Italian", "Italian");
-                dataGridView_LetterTable.Columns.Add("German", "German");
-                dataGridView_LetterTable.Columns.Add("French", "French");
-                dataGridView_LetterTable.Columns.Add("Dutch", "Dutch");
-            }
 
 
         }
-
-        private void FilterAndDisplayValidCharactersOfInputText(Variables variables)
-        {
-            char[] charArray = variables.inputText.ToCharArray();
-            variables.inputTextArray.AddRange(charArray);
-
-            textBox_InputText.Text = "";
-
-            foreach (char c in variables.inputTextArray)
-            {
-                if (variables.totalCapitalLettersInTurkishEnglishSpanishItalianGermanFrenchDutchAlphabets.ContainsKey(c))
-                {
-                    textBox_InputText.Text += c;
-                }
-                Application.DoEvents();
-            }
-        }
-
-
-
-
-
-
 
     }
 }
