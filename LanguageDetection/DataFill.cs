@@ -53,6 +53,10 @@ namespace LanguageDetection
                     {
                       _dataGridViewLetterTable.Rows[i].Cells[2].Value = _variables.letterFrequenciesOfTheTurkishAlphabet[Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)];
                     }
+                    else
+                    {
+                        _dataGridViewLetterTable.Rows[i].Cells[2].Value = 0;
+                    }
                 }
             }
         }
@@ -67,6 +71,10 @@ namespace LanguageDetection
                     if (_variables.letterFrequenciesOfTheEnglishAlphabet.ContainsKey(Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)))
                     {
                        _dataGridViewLetterTable.Rows[i].Cells[3].Value = _variables.letterFrequenciesOfTheEnglishAlphabet[Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)];
+                    }
+                    else
+                    {
+                        _dataGridViewLetterTable.Rows[i].Cells[3].Value = 0;
                     }
                 }
             }
@@ -84,6 +92,10 @@ namespace LanguageDetection
                     {
                       _dataGridViewLetterTable.Rows[i].Cells[4].Value = _variables.letterFrequenciesOfTheSpanishAlphabet[Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)];
                     }
+                    else
+                    {
+                        _dataGridViewLetterTable.Rows[i].Cells[4].Value = 0;
+                    }
                 }
             }
 
@@ -99,6 +111,10 @@ namespace LanguageDetection
                     {
                      _dataGridViewLetterTable.Rows[i].Cells[5].Value = _variables.letterFrequenciesOfTheItalianAlphabet[Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)];
                     }
+                    else
+                    {
+                        _dataGridViewLetterTable.Rows[i].Cells[5].Value = 0;
+                    }
                 }
             }
         }
@@ -112,6 +128,10 @@ namespace LanguageDetection
                     if ( _variables.letterFrequenciesOfTheGermanAlphabet.ContainsKey(Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)))
                     {
                      _dataGridViewLetterTable.Rows[i].Cells[6].Value = _variables.letterFrequenciesOfTheGermanAlphabet[Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)];
+                    }
+                    else
+                    {
+                        _dataGridViewLetterTable.Rows[i].Cells[6].Value = 0;
                     }
                 }
             }
@@ -127,6 +147,10 @@ namespace LanguageDetection
                     {
                      _dataGridViewLetterTable.Rows[i].Cells[7].Value = _variables.letterFrequenciesOfTheFrenchAlphabet[Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)];
                     }
+                    else
+                    {
+                        _dataGridViewLetterTable.Rows[i].Cells[7].Value = 0;
+                    }
                 }
             }
         }
@@ -135,17 +159,22 @@ namespace LanguageDetection
         {
             for (int i = 0; i < _dataGridViewLetterTable.Rows.Count; i++)
             {
-                // write if statement to prevent the error of out of range
+                
                 if (_dataGridViewLetterTable.Rows[i].Cells[0].Value != null)
                 {
                     if (_variables.letterFrequenciesOfTheDutchAlphabet.ContainsKey(Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)))
                     {
                         _dataGridViewLetterTable.Rows[i].Cells[8].Value = _variables.letterFrequenciesOfTheDutchAlphabet[Convert.ToChar(_dataGridViewLetterTable.Rows[i].Cells[0].Value)];
                     }
+                    else
+                    {
+                        _dataGridViewLetterTable.Rows[i].Cells[8].Value = 0;
+                    }
                 }
             }
             _dataGridViewLetterTable.Refresh();
             _dataGridViewLetterTable.AutoResizeColumns();
+            _dataGridViewLetterTable.AutoResizeColumnHeadersHeight();
 
         }
 

@@ -18,7 +18,9 @@ namespace LanguageDetection
             Variables variables = new();
             DataProcess dataProcess = new DataProcess(variables, textBox_InputText);
             DataFill dataFill = new DataFill(variables, dataGridView_LetterTable);
-           
+            TableHandel tableHandle = new TableHandel(dataGridView_LetterTable, textBox_InputText);
+
+
 
             dataProcess.ReplacetheCharachtersOutOfLettersInTheInputText();
 
@@ -48,8 +50,10 @@ namespace LanguageDetection
             dataFill.FillTheLetterTableDutchAlphabetColumn();
 
 
-
+            tableHandle.ColorizeCellsByProximityToFrequency();
+            tableHandle.ColorizeCellsByNonUsedLettersInTheText();
         }
+
 
     }
 }
